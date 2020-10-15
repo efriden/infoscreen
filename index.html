@@ -5,22 +5,35 @@
     #over { font-size:2em; position:absolute; top:20px; left:20px; z-index:2; color:white; font-family: "Lucida Console", Courier, monospace;}
   </style>
   <script>
-        window.setInterval(function() {
-            reloadIFrame()
-        }, 300000);
+    window.setInterval(function() {
+        reloadIFrame()
+    }, 300000);
 
-        function reloadIFrame() {
-            console.log('reloading..');
-            document.getElementById('presentation').src="https://docs.google.com/presentation/d/e/2PACX-1vRGZW9IJLL-3zA2aL7yd5aDyV8DVQWDSIZZxOH_14r9BJ9EIoj3O7_V6AOg4HW71ivTmkOVIZPw71aH/embed?start=true&loop=true&delayms=10000";
-        }
+    function reloadIFrame() {
+        console.log('reloading..');
+        document.getElementById('presentation').src="https://docs.google.com/presentation/d/e/2PACX-1vRGZW9IJLL-3zA2aL7yd5aDyV8DVQWDSIZZxOH_14r9BJ9EIoj3O7_V6AOg4HW71ivTmkOVIZPw71aH/embed?start=true&loop=true&delayms=10000";
+    }
+    
+    function startTime() {
+      var today = new Date();
+      var h = today.getHours();
+      var m = today.getMinutes();
+      var s = today.getSeconds();
+      m = checkTime(m);
+      s = checkTime(s);
+      document.getElementById('over').innerHTML =
+      h + ":" + m + ":" + s;
+      var t = setTimeout(startTime, 500);
+    }
+    
+    function checkTime(i) {
+      if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+      return i;
+    }
   </script>
 </head>
-<body>
+<body onload="startTime()">
   <iframe id='presentation' src="https://docs.google.com/presentation/d/e/2PACX-1vRGZW9IJLL-3zA2aL7yd5aDyV8DVQWDSIZZxOH_14r9BJ9EIoj3O7_V6AOg4HW71ivTmkOVIZPw71aH/embed?start=true&loop=true&delayms=10000" frameborder="0" width="1440" height="839" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-  <div id="over"><span id="datetime"></span></div>
-
-  <script>
-    var dt = new Date();
-    document.getElementById("datetime").innerHTML = dt.toLocaleString();
-  </script>
+  
+  <div id="over"></div>
 </body>
